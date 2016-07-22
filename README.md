@@ -1,11 +1,16 @@
 # scrapy_space_news
  scrapy to fetch data from various sources on space news
 
+[### Installation #####]
 
-[ INSTALATION ]
+install <a href="http://virtualenvwrapper.readthedocs.io/en/latest/install.html">mkvirtualenv</a>
 
-install <a href="http://virtualenvwrapper.readthedocs.io/en/latest/install.html">mkvirtual</a>
+Create new python environment - mkvirtualenv name_my_env
 
-pip install scrapy
+Install scrapy - pip install scrapy
 
-pip install selenium
+Install selenium - pip install selenium
+
+Test: scrapy crawl facebook_nasa -o output.json
+
+IMPORTANT : This script is in development
