@@ -7,3 +7,5 @@
 install <a href="http://virtualenvwrapper.readthedocs.io/en/latest/install.html">mkvirtual</a>
 
 pip install scrapy
+
+pip install selenium
