@@ -3,12 +3,13 @@ import scrapy
 from selenium import webdriver
 
 
-class FacebookNasaSpider(scrapy.Spider):
-    name = "facebook_nasa"
+class FacebookSpider(scrapy.Spider):
+    name = "facebook_spider"
     allowed_domains = ["pt-br.facebook.com/NASA"]
     start_urls = (
         'http://pt-br.facebook.com/NASA',
     )
+
     def parse(self, response):
         publications = response.css('._1xnd ._4-u2 ._4-u8')
         for publication in publications:
