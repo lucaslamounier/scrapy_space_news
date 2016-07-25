@@ -14,7 +14,6 @@ BOT_NAME = 'scrapy_news_geo'
 SPIDER_MODULES = ['scrapy_news_geo.spiders']
 NEWSPIDER_MODULE = 'scrapy_news_geo.spiders'
 
-
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 USER_AGENT = 'Mozilla/5.0 (X11; Fedora; Linux x86_64)'
 

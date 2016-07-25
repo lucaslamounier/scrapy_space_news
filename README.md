@@ -13,6 +13,8 @@ Install scrapy - pip install scrapy
 
 Install selenium - pip install selenium
 
+Install PhantomJS - npm install phantomjs
+
 Install Natural language toolkit - pip install nltk
 
 Test: scrapy crawl facebook_nasa -o output.json

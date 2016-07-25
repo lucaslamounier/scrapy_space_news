@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
 import scrapy
+from scrapy.http import Request
 from scrapy.spiders import CrawlSpider, Rule
-#from scrapy.linkextractors.sgml import SgmlLinkExtractor
-from scrapy.linkextractors import LinkExtractor
+from selenium import webdriver
 
 
 class UolSpiderNewsSpider(CrawlSpider):
     name = "uol_spider"
-    allowed_domains = ["noticias.uol.com.br", "uol.com.br"]
+    allowed_domains = ['uol.com.br']
+    download_delay = 0.5
     start_urls = (
         'http://noticias.uol.com.br/ciencia/temas/astronomia/noticias/',
     )
@@ -16,10 +17,11 @@ class UolSpiderNewsSpider(CrawlSpider):
         items = response.xpath(
             "//div[contains(@class,'itens-indice')]//section"
         )
-        for item in items:
-            url = item.xpath(".//a/@href").extract_first()
-            self.log('URL: {0}'.format(url))
-            yield scrapy.Request(url=url, callback=self.parse_detail)
+        news = set(item.xpath(".//a/@href").extract_first() for item in items)
+
+        for item in news:
+            self.log('URL: {0}'.format(item))
+            yield Request(url=item, callback=self.parse_detail)
 
         next_page = response.xpath(
             '//div[contains(@class, "filtro-paginacao")]/a/@href'
@@ -28,7 +30,7 @@ class UolSpiderNewsSpider(CrawlSpider):
         if next_page:
             next_url = '{}#{}'.format(response.url, next_page)
             self.log('Next Page: {0}'.format(next_url))
-            yield scrapy.Request(url=next_url, callback=self.parse)
+            yield Request(url=next_url, callback=self.parse)
 
     def parse_detail(self, response):
         item = dict()
@@ -38,3 +40,5 @@ class UolSpiderNewsSpider(CrawlSpider):
         item['date'] = response.xpath("normalize-space(//span[contains(@class, 'data')]//.)").extract_first()
         self.log('Extract item {}'.format(item['title']))
         yield item
+
+
